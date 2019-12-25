@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public class SingleMessage implements Serializable{
 
-    private long timeLong;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private long timeLong;
     private String name;
     private String bizID;
     private String time;

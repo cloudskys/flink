@@ -13,7 +13,7 @@ import org.apache.flink.util.Collector;
 
 public class KafkaToFlink {
     public static void main(String[] args) throws Exception {
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+    	final  StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         //默认情况下，检查点被禁用。要启用检查点，请在StreamExecutionEnvironment上调用enableCheckpointing(n)方法，
         // 其中n是以毫秒为单位的检查点间隔。每隔5000 ms进行启动一个检查点,则下一个检查点将在上一个检查点完成后5秒钟内启动
         env.enableCheckpointing(5000);
