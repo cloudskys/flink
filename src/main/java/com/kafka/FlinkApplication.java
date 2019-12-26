@@ -25,15 +25,13 @@ public class FlinkApplication implements CommandLineRunner {
 		 SpringApplication.run(FlinkApplication.class, args);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void run(String... args) throws Exception {
 		StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 		FlinkKafkaConsumer<String> kafkaConsumer = new FlinkKafkaConsumer<String>(SysConst.ribonTopic, new SimpleStringSchema(),getProperties());
 		DataStreamSource<String> dataStream = env.addSource(kafkaConsumer);
-		// 此处省略处理逻辑
 		dataStream.addSink(new SimpleSink());
-		 env.execute();
+		env.execute();
 
 	}
 
