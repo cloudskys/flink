@@ -19,13 +19,15 @@ public class StreamingJob {
 		props.setProperty("bootstrap.servers", "127.0.0.1:9092");
 		props.setProperty("zookeeper.connect", "127.0.0.1:2181");
 		props.setProperty("group.id", "test-consumer-group");
-
-		
+		props.put("enable.auto.commit", "true");
+		props.put("auto.commit.interval.ms", "1000");
+		props.put("auto.offset.reset", "earliest");
+		props.put("session.timeout.ms", "30000");
 		FlinkKafkaConsumer<String> consumer =
 				new FlinkKafkaConsumer<String>("topic001", new SimpleStringSchema(), props);
 
 		
-		consumer.assignTimestampsAndWatermarks(new CustomWatermarkEmitter());
+		//consumer.assignTimestampsAndWatermarks(new CustomWatermarkEmitter());
 		DataStream<String> keyedStream = env.addSource(consumer);
 		 keyedStream.print();
 
