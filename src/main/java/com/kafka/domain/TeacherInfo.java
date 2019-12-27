@@ -24,5 +24,9 @@ public class TeacherInfo implements Serializable{
 	public void setMobilePhone(String mobilePhone) {
 		this.mobilePhone = mobilePhone;
 	}
+	public TeacherInfo(Integer userId) {
+		super();
+		this.userId = userId;
+	}
 
 }

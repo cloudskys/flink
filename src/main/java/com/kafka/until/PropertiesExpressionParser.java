@@ -2,10 +2,20 @@ package com.kafka.until;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.kafka.domain.TeacherInfo;
 
 public class PropertiesExpressionParser {
 
@@ -130,5 +140,38 @@ public class PropertiesExpressionParser {
 		expParser.setProKeyPath(proKeyPath);
 	
 	}
+	public static void main(String[] args) {
+		List<String> languages = Arrays.asList("Java", "Scala", "C++", "Haskell", "Lisp");
+		languages.forEach(n -> System.out.println(n));
+		filter(languages, (str)->((String) str).startsWith("J"));
+		
+		Map m = new HashMap();
+		m.put("1", 12);
+		
+		m.forEach((k,v) -> System.out.println(k+","+v));
+		
+		List<TeacherInfo> lan = new ArrayList<TeacherInfo>();
+		lan.add(new TeacherInfo(20));
+		lan.add(new TeacherInfo(30));
+		lan.add(new TeacherInfo(40));
+		lan.add(new TeacherInfo(40));
+		lan.stream().map(user -> user.getUserId() >= 40).collect(Collectors.toList());
+		lan.forEach(n -> System.out.println(n.getUserId()));
+		
+		lan.stream().filter(user -> user.getUserId() >= 40).collect(Collectors.toList());
+		lan.forEach(n -> System.out.println(n.getUserId()));
+		System.out.println("---------");
+		//lan.stream().limit(1).collect(Collectors.toList());
+		//lan.forEach(n -> System.out.println(n.getUserId()));
+	}
+
+	public static void filter(List<String> names, Predicate condition) {
+	    for(String name: names)  {
+	        if(condition.test(name)) {
+	            System.out.println(name + " ");
+	        }
+	    }
+	}
+	
 }
 
